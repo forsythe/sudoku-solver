@@ -11,23 +11,23 @@ struct cell
 class Node
 {
     public:
-        Node(int*);
-        void printNode();
-        bool isSolved();
-        bool isValid();
+        Node(const int*);
+        void printNode() const;
+        bool isSolved() const;
+        bool isValid() const;
 
-        inline int* getGrid() { return grid[0]; }; //It's OK for this to be shallow, since constructor deep copies!
-        inline void setGridVal(int r, int c, int new_val){ grid[r][c] = new_val; };
-        std::vector<Node> getCandidates();
+        const int* getGrid() const { return grid[0]; }; //It's OK for this to be shallow, since constructor deep copies!
+        void setGridVal(int r, int c, int new_val){ grid[r][c] = new_val; };
+        std::vector<Node> getCandidates() const;
 
     protected:
     private:
         int grid[9][9];
         bool solved;
 
-        cell getMostConstrainedCell();
-        int getNumPossibilitiesForCell(int r, int c);
-        std::set<int> getPossibilitiesForCell(int r, int c);
+        cell getMostConstrainedCell() const;
+        int getNumPossibilitiesForCell(int r, int c) const;
+        std::set<int> getPossibilitiesForCell(int r, int c) const;
 
 };
 

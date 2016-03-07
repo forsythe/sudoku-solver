@@ -3,14 +3,14 @@
 
 using namespace std;
 
-Node::Node(int* p)
+Node::Node(const int* p)
 {
     for (int k = 0; k < 81; k++)
         grid[k/9][k%9] = p[k];
     solved = false;
 }
 
-bool Node::isSolved()
+bool Node::isSolved() const
 {
     for (int r = 0; r < 9; r++)
         for (int c = 0; c < 9; c++)
@@ -19,7 +19,7 @@ bool Node::isSolved()
     return true;
 }
 
-bool Node::isValid()
+bool Node::isValid() const
 {
     int cur, r_t, c_t;
     for (int r = 0; r < 9; r++){
@@ -39,7 +39,7 @@ bool Node::isValid()
     return true;
 }
 
-vector<Node> Node::getCandidates()
+vector<Node> Node::getCandidates() const
 {
     vector<Node> ans; //Candidates values for empty cell
 
@@ -55,7 +55,7 @@ vector<Node> Node::getCandidates()
     return ans;
 }
 
-cell Node::getMostConstrainedCell()
+cell Node::getMostConstrainedCell() const
 {
     int num_p[9][9] = {0};
     int min_r = -1, min_c = -1;
@@ -80,7 +80,7 @@ cell Node::getMostConstrainedCell()
     return {min_r, min_c};
 }
 
-int Node::getNumPossibilitiesForCell(int r, int c)
+int Node::getNumPossibilitiesForCell(int r, int c) const
 {
     if (grid[r][c] != 0) //If cell is occupied, it has 0 possibilities for other numbers
         return 0;
@@ -106,7 +106,7 @@ int Node::getNumPossibilitiesForCell(int r, int c)
     return num_possible;
 }
 
-set<int> Node::getPossibilitiesForCell(int r, int c)
+set<int> Node::getPossibilitiesForCell(int r, int c) const
 {
     set<int> possb;
     if (grid[r][c] != 0){ return possb; } //Return empty set if cell is taken
@@ -129,7 +129,7 @@ set<int> Node::getPossibilitiesForCell(int r, int c)
     return possb;
 }
 
-void Node::printNode()
+void Node::printNode() const
 {
     cout << "+-------+-------+-------+" << endl;
 

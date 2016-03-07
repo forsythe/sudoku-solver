@@ -9,19 +9,18 @@
 
 using namespace std;
 
-bool done = false;
 
-void solveR(Node& n) {
-    if (done) return;
+bool solveR(Node const &n) {
     if (n.isSolved()) {
-        done = true;
         n.printNode();
-        return;
+        return true;
     }
 
     vector<Node> candidates = n.getCandidates();
-    for (int k = 0; k < candidates.size(); k++)  solveR(candidates[k]);
-    candidates.clear();
+    for (int k = 0; k < candidates.size(); k++){
+        if(solveR(candidates[k])) return true;
+    }
+    return false;
 }
 
 int main() {
@@ -47,7 +46,7 @@ int main() {
     double dur;
     start = clock();
 
-    solveR(n);
+    bool done = solveR(n);
 
     dur = (clock()-start)/(double)CLOCKS_PER_SEC;
     cout << dur << "s" << endl;
